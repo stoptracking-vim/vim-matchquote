@@ -23,6 +23,11 @@ if s:matchit_n_rhs =~# 'Match_wrapper'
   " Make the function easier to call ourselves.
   let s:matchit_n_rhs = s:matchit_n_rhs[6:]  " drop leading :<C-U>
   let s:matchit_n_rhs = substitute(s:matchit_n_rhs, '<CR>', '', '')  " drop trailing <CR>
+  let s:matchit_x_rhs = s:matchit_x_rhs[6:]  " drop leading :<C-U>
+  let s:matchit_x_rhs = substitute(s:matchit_x_rhs, '\s\?<CR>', '', '')  " drop trailing <CR>
+  if s:matchit_x_rhs[-1:] != ')'
+    let s:matchit_x_rhs = substitute(s:matchit_x_rhs, ')', ') | normal! ', '')
+  endif
 endif
 
 if s:matchit_n_rhs =~# '<Plug>'
